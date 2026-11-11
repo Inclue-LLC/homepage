@@ -1,5 +1,6 @@
 (() => {
   document.documentElement.classList.remove('no-js');
+
   const header = document.querySelector('.site-header');
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.getElementById('global-nav');
@@ -7,13 +8,16 @@
   // Mobile menu
   const setOpen = (open) => {
     toggle.setAttribute('aria-expanded', String(open));
+    toggle.querySelector('.visually-hidden').textContent = open ? 'メニューを閉じる' : 'メニューを開く';
     nav.classList.toggle('is-open', open);
+    document.body.classList.toggle('nav-open', open);
   };
   toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
   nav.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
 
-  // Header border on scroll
+  // Header shadow on scroll
   const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -28,12 +32,61 @@
           io.unobserve(entry.target);
         }
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
     items.forEach((el) => io.observe(el));
   } else {
     items.forEach((el) => el.classList.add('is-visible'));
   }
 
-  const year = document.getElementById('year');
-  if (year) year.textContent = String(new Date().getFullYear());
+  // In-page tabs: highlight the section in view
+  const tabLinks = [...document.querySelectorAll('.page-tabs a[href^="#"]')];
+  if (tabLinks.length && 'IntersectionObserver' in window) {
+    const map = new Map(tabLinks.map((a) => [a.getAttribute('href').slice(1), a]));
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        tabLinks.forEach((a) => a.classList.remove('is-active'));
+        const link = map.get(entry.target.id);
+        if (link) {
+          link.classList.add('is-active');
+          link.scrollIntoView({ block: 'nearest', inline: 'center' });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    map.forEach((_, id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+  }
+
+  // Contact form -> opens the visitor's mail app with the inquiry filled in
+  const form = document.getElementById('contact-form');
+  if (form) {
+    const error = form.querySelector('.form-error');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const required = [...form.querySelectorAll('[required]')];
+      let ok = true;
+      required.forEach((el) => {
+        const invalid = !el.value.trim() || (el.type === 'email' && !el.checkValidity());
+        el.classList.toggle('is-invalid', invalid);
+        el.setAttribute('aria-invalid', String(invalid));
+        if (invalid) ok = false;
+      });
+      error.hidden = ok;
+      if (!ok) { form.querySelector('.is-invalid').focus(); return; }
+
+      const v = (name) => form.elements[name].value.trim();
+      const subject = `【お問い合わせ】${v('type')}`;
+      const body = [
+        `お問い合わせ種別：${v('type')}`,
+        `会社名・団体名：${v('company') || '-'}`,
+        `お名前：${v('name')}`,
+        `メールアドレス：${v('email')}`,
+        '',
+        '■お問い合わせ内容',
+        v('message'),
+      ].join('\n');
+      window.location.href = `mailto:${form.dataset.mail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  }
+
+  document.querySelectorAll('.js-year').forEach((el) => { el.textContent = String(new Date().getFullYear()); });
 })();
