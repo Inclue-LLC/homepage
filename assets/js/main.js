@@ -1,5 +1,6 @@
 (() => {
   document.documentElement.classList.remove('no-js');
+  document.documentElement.classList.add('js-reveal');
 
   const header = document.querySelector('.site-header');
   const toggle = document.querySelector('.nav-toggle');
@@ -84,9 +85,32 @@
         '■お問い合わせ内容',
         v('message'),
       ].join('\n');
+      const done = form.querySelector('.form-done');
+      if (form.dataset.preview) {
+        done.textContent = 'これはプレビュー版のため、送信やメールの作成は行われません。公開サイトでは、ここでメールソフトが起動します。';
+        done.hidden = false;
+        return;
+      }
       window.location.href = `mailto:${form.dataset.mail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
   }
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach((btn) => {
+    const label = btn.querySelector('span');
+    btn.addEventListener('click', () => {
+      const text = btn.dataset.copy;
+      const flash = (msg) => { label.textContent = msg; setTimeout(() => { label.textContent = 'コピー'; }, 1800); };
+      const fallback = () => {
+        const target = btn.parentElement.querySelector('.mail-text, a');
+        if (target) { const r = document.createRange(); r.selectNodeContents(target); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+        flash('選択しました');
+      };
+      try {
+        navigator.clipboard.writeText(text).then(() => flash('コピーしました'), fallback);
+      } catch (e) { fallback(); }
+    });
+  });
 
   document.querySelectorAll('.js-year').forEach((el) => { el.textContent = String(new Date().getFullYear()); });
 })();

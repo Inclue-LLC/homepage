@@ -67,7 +67,10 @@
           </ul>
           <div class="contact-mail">
             <p>メールでのお問い合わせ</p>
-            <a href="mailto:m_sato@inclue-llc.jp"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>m_sato@inclue-llc.jp</a>
+            <div class="contact-mail-row">
+              <a href="mailto:m_sato@inclue-llc.jp"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>m_sato@inclue-llc.jp</a>
+              <button class="copy-btn" type="button" data-copy="m_sato@inclue-llc.jp"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 011-1h10"/></svg><span>コピー</span></button>
+            </div>
           </div>
         </div>
 
@@ -104,6 +107,7 @@
             <textarea id="f-message" name="message" rows="7" required></textarea>
           </div>
           <p class="form-error" role="alert" hidden>必須項目をご入力ください。</p>
+          <p class="form-done" role="status" hidden></p>
           <button class="btn btn-primary btn-lg" type="submit">メールを作成する<svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </form>
       </div>
