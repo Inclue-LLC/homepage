@@ -95,6 +95,20 @@
     });
   }
 
+  // Works filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  if (filterBtns.length) {
+    const cards = document.querySelectorAll('.work-card');
+    const count = document.querySelector('.js-count');
+    filterBtns.forEach((btn) => btn.addEventListener('click', () => {
+      const f = btn.dataset.filter;
+      filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      let n = 0;
+      cards.forEach((c) => { const show = f === 'all' || c.dataset.cat === f; c.hidden = !show; if (show) n += 1; });
+      if (count) count.textContent = String(n);
+    }));
+  }
+
   // Copy buttons
   document.querySelectorAll('.copy-btn').forEach((btn) => {
     const label = btn.querySelector('span');

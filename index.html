@@ -33,7 +33,7 @@
       <nav class="global-nav" id="global-nav" aria-label="メインメニュー">
         <ul>
           <li><a href="business.html"><span class="nav-en">Business</span>事業内容</a></li>
-          <li><a href="characters.html"><span class="nav-en">Characters</span>キャラクター</a></li>
+          <li><a href="works.html"><span class="nav-en">Works</span>最近の取り組み</a></li>
           <li><a href="company.html"><span class="nav-en">Company</span>会社概要</a></li>
           <li class="nav-cta-item"><a class="nav-cta" href="contact.html">お問い合わせ</a></li>
         </ul>
@@ -117,43 +117,49 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="characters">
       <div class="container">
-        <div class="sec-head-row">
         <div class="sec-head">
           <p class="sec-en">Characters</p>
           <h2 class="sec-title">キャラクター一覧</h2>
         </div>
-          <a class="link-more" href="characters.html">詳しく見る<svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
         <ul class="chara-cards">
-          <li class="reveal"><a class="chara-card cc-hanuru" href="characters.html#hanuru">
-            <img src="assets/img/chara-hanuru.webp" alt="" loading="lazy" width="600" height="444">
-            <span class="chara-tag">自社IP</span><span class="chara-name">スタジオハヌル</span>
-          </a></li>
-          <li class="reveal"><a class="chara-card cc-mongmong" href="characters.html#mongmong">
-            <img src="assets/img/chara-mongmong.webp" alt="" loading="lazy" width="600" height="487">
-            <span class="chara-tag">韓国クリエイターIP</span><span class="chara-name">Lovely MongMong</span>
-          </a></li>
-          <li class="reveal"><a class="chara-card cc-funyu" href="characters.html#funyu">
-            <img src="assets/img/chara-funyu.webp" alt="" loading="lazy" width="425" height="346">
-            <span class="chara-tag">日本クリエイターIP</span><span class="chara-name">ふにゅ</span>
-          </a></li>
+          <li class="chara-item reveal">
+            <div class="chara-card cc-hanuru"><img src="assets/img/chara-hanuru.webp" alt="スタジオハヌルのキャラクター" loading="lazy" width="600" height="444"></div>
+            <div class="chara-info">
+              <span class="chara-tag">自社IP</span>
+              <h3 class="chara-name">スタジオハヌル</h3>
+              <p>オリジナルIP。ライセンスやサンリオコラボを中心に展開。カプセルトイのぬいぐるみシリーズは累計30万個。</p>
+            </div>
+          </li>
+          <li class="chara-item reveal">
+            <div class="chara-card cc-mongmong"><img src="assets/img/chara-mongmong.webp" alt="Lovely MongMongのキャラクター" loading="lazy" width="600" height="487"></div>
+            <div class="chara-info">
+              <span class="chara-tag">韓国クリエイターIP</span>
+              <h3 class="chara-name">Lovely MongMong</h3>
+              <p>日本・中国で独占契約。中国で人気があり、約50社のライセンシーと提携。</p>
+            </div>
+          </li>
+          <li class="chara-item reveal">
+            <div class="chara-card cc-funyu"><img src="assets/img/chara-funyu.webp" alt="ふにゅのキャラクター" loading="lazy" width="425" height="346"></div>
+            <div class="chara-info">
+              <span class="chara-tag">日本クリエイターIP</span>
+              <h3 class="chara-name">ふにゅ</h3>
+              <p>日本・中国で独占契約。現在はPOP UPを中心に展開。サンリオコラボも決定。</p>
+            </div>
+          </li>
         </ul>
       </div>
     </section>
 
-    <section class="section section-soft">
+    <section class="section section-soft" id="platforms">
       <div class="container">
-        <div class="sec-head-row">
         <div class="sec-head">
           <p class="sec-en">Platforms</p>
           <h2 class="sec-title">プラットフォーム一覧</h2>
         </div>
-          <a class="link-more" href="business.html#platform">詳しく見る<svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
         <ul class="plat-cards">
-          <li class="reveal"><a class="plat-card" href="business.html#platform">
+          <li class="reveal"><div class="plat-card">
             <div class="plat-img"><img src="assets/img/gachafy.webp" alt="オンラインガチャガチャモール Gachafy" loading="lazy" width="1200" height="681"></div>
             <div class="plat-body">
               <p class="plat-kind">オンラインガチャガチャモール</p>
@@ -161,8 +167,8 @@
               <p>ハンドメイド作品・キャラクターグッズを、すべてガチャガチャ形式で販売。出品商品数は500点を突破しました。</p>
               <p class="plat-status"><span class="chip">運営中</span>2023年7月 サービス開始</p>
             </div>
-          </a></li>
-          <li class="reveal"><a class="plat-card" href="business.html#platform">
+          </div></li>
+          <li class="reveal"><div class="plat-card">
             <div class="plat-img"><img src="assets/img/popbase.webp" alt="オンラインPOP UP SHOP POP BASE の店内イメージ" loading="lazy" width="1200" height="750"></div>
             <div class="plat-body">
               <p class="plat-kind">オンラインPOP UP SHOP</p>
@@ -170,16 +176,19 @@
               <p>アバターで店内を歩けるオンラインPOP UP。新商品発売や周年イベント、オフラインPOP UPの事後販売に。</p>
               <p class="plat-status"><span class="chip chip-coral">準備中</span>2027年1月 サービス開始予定</p>
             </div>
-          </a></li>
+          </div></li>
         </ul>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="works">
       <div class="container">
+        <div class="sec-head-row">
         <div class="sec-head">
           <p class="sec-en">Works</p>
           <h2 class="sec-title">最近の取り組み</h2>
+        </div>
+          <a class="link-more" href="works.html">一覧を見る<svg class="i-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
         <div class="works">
           <article class="work reveal">
@@ -244,7 +253,7 @@
         <ul>
           <li><a href="index.html">トップ</a></li>
           <li><a href="business.html">事業内容</a></li>
-          <li><a href="characters.html">キャラクター</a></li>
+          <li><a href="works.html">最近の取り組み</a></li>
           <li><a href="company.html">会社概要</a></li>
           <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
